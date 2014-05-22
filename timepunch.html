@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Time Punch</title>
+	<link rel="stylesheet" type="text/css" href="webclothes.css">
+	<script src="knockout.js"></script>
+</head>
+<body>
+
+<div id="appscreen">
+
+	<div id="view"></div>
+
+	<div id="buttons">
+
+	<div id="intro">
+		<button type="button" id="sel" onclick="beginPunching()" disabled>Select</button><button type="button" id="del" onclick="deleteJob()" disabled>Delete</button><button type="button" id="add" onclick="addJob()">Add</button>
+	</div>
+
+	<div id="punch">
+		<div><button type="button" id="in" onclick="punchIn()">Punch In</button><button type="button" id="out" onclick="punchOut()" disabled>Punch Out</button></div>
+		<div><button type="button" onclick="printWeeklySummary()">Weekly Summary</button><button type="button" onclick="printAllTime()">All Time</button></div>
+		<div><button type="button" onclick="back()">Back</div></div>
+	</div>
+
+	</div>
+</div>
+
+</body>
+
+<script>welcomeScreen();</script>
+
+</html>
