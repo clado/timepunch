@@ -1,12 +1,12 @@
 var jobselected;
 
 //onload action, loads jobs
+//also run when "back" button is used to repopulate view
 function welcomeScreen(){
 	//loads existing jobs
 	if (localStorage["timepunch.totaljobs"] != null){
 		for(var count = 0; count < parseInt(localStorage["timepunch.totaljobs"]); count ++){
-			jobname = localStorage["timepunch.job" + count + ".name"];
-			document.getElementById("view").innerHTML += '<button class="jobs" id="' + count + '" onfocus="selectJob(this.id)" onblur="deselect()"> ' + jobname + '</button>';
+			printJob(count);
 		}
 	}
 	//initializes job count
@@ -16,6 +16,11 @@ function welcomeScreen(){
 	}
 }
 
+//prints job to view
+function printJob(jobId) {
+	jobname = localStorage["timepunch.job" + jobId + ".name"];
+	document.getElementById("view").innerHTML += '<button class="jobs" id="' + jobId + '" onfocus="selectJob(this.id)" onblur="deselect()"> ' + jobname + '</button>';
+}
 
 //onfocus action
 function selectJob(id){
@@ -33,8 +38,8 @@ function deselect(){
 //"select" button
 function beginPunching(){
 	document.getElementById("view").innerHTML = "";
-	document.getElementById("sel").disabled = true;
-	document.getElementById("del").disabled = true;
+	//document.getElementById("sel").disabled = true;
+	//document.getElementById("del").disabled = true;
 	if (localStorage["timepunch.job" + jobselected + ".punchedin"] == "true"){
 		var totalpunches = parseInt(localStorage["timepunch.job" + jobselected + ".totalpunches"]) - 1;
 		var lastpunch = new Date(localStorage["timepunch.job" + jobselected + ".punch" + totalpunches].toString());
@@ -66,7 +71,7 @@ function addJob(){
 	if (jobname != null){
 			var totaljobs = localStorage["timepunch.totaljobs"];
 			localStorage["timepunch.job" + totaljobs + ".name"] = jobname;
-			document.getElementById("view").innerHTML += '<button class="jobs" id="' + totaljobs + '" onclick="selectJob(this.id)">' + jobname + '</button>';
+			printJob(totalJobs);
 			localStorage["timepunch.job" + totaljobs + ".totalpunches"] = 0;
 			localStorage["timepunch.totaljobs"] = parseInt(localStorage["timepunch.totaljobs"]) + 1;
 	}
