@@ -63,6 +63,10 @@ button {
 	border-width: 1px;
 }
 
+.jobs:focus {
+	background-color: blue;
+}
+
 #in {
 	background-color: rgb(127, 184, 101);
 }

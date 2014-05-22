@@ -1,26 +1,33 @@
 var jobselected;
 
+//onload action, loads jobs
 function welcomeScreen(){
+	//loads existing jobs
 	if (localStorage["timepunch.totaljobs"] != null){
 		for(var count = 0; count < parseInt(localStorage["timepunch.totaljobs"]); count ++){
 			jobname = localStorage["timepunch.job" + count + ".name"];
-			document.getElementById("view").innerHTML += '<button class="jobs" id="' + count + '" onclick="selectJob(this.id)">' + jobname + '</button>';
+			document.getElementById("view").innerHTML += '<button class="jobs" id="' + count + '" onfocus="selectJob(this.id)" onblur="deselect()"> ' + jobname + '</button>';
 		}
 	}
+	//initializes job count
+	//first time app is loaded
 	else {
 		localStorage["timepunch.totaljobs"] = 0;
 	}
 }
 
-//onclick action
+
+//onfocus action
 function selectJob(id){
-	document.getElementById(id).style.backgroundColor = 'blue';
-	for (var count = 0; count < parseInt(localStorage["timepunch.totaljobs"]); count ++){
-		if (count != id) document.getElementById(count).style.backgroundColor = "#FFF";
-	}
 	document.getElementById("sel").disabled = false;
 	document.getElementById("del").disabled = false;
 	jobselected = id;
+}
+
+//onblur action
+function deselect(){
+	document.getElementById("sel").disabled = true;
+	document.getElementById("del").disabled = true;
 }
 
 //"select" button
