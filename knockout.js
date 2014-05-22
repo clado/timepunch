@@ -43,10 +43,14 @@ function beginPunching(){
 //"delete" button
 function deleteJob(){
 	localStorage["timepunch.totaljobs"] = parseInt(localStorage["timepunch.totaljobs"]) - 1;
+	var totalpunches = localStorage["timepunch.job" + jobselected + ".totalpunches"];
+	for (var i = 0; i < totalpunches; i ++){
+		delete(localStorage["timepunch.job" + jobselected + ".punch" + i]);
+	}
+	delete(localStorage["timepunch.job" + jobselected + ".punchedin"]);
 	delete(localStorage["timepunch.job" + jobselected + ".name"]);
 	delete(localStorage["timepunch.job" + jobselected + ".totalpunches"]);
 	document.getElementById("view").removeChild(document.getElementById(jobselected));
-	alert("Time punch data could not be deleted. System may not work correcly until old records removed.");
 }
 
 //"add" button
@@ -123,7 +127,7 @@ function printWeeklySummary(){
 			totalhours += Math.floor(totalminutes / 60);
 			totalminutes = totalminutes % 60;
 		}
-		document.getElementById("view").innerHTML += "<br /><br /><strong>Total:</strong> " + totalhours + ":" + totalminutes;
+		document.getElementById("view").innerHTML += "<br /><br /><strong>Total:</strong> " + totalhours + ":" + totalminutes + "<br />";
 	}
 	else {
 		alert("Please punch out before viewing hours.");
@@ -162,7 +166,7 @@ function printAllTime(){
 		}
 		totalhours += Math.floor(totalminutes / 60);
 		totalminutes = totalminutes % 60;
-		document.getElementById("view").innerHTML += "<br /><br /><strong>Total:</strong> " + totalhours + ":" + totalminutes;
+		document.getElementById("view").innerHTML += "<br /><br /><strong>Total:</strong> " + totalhours + ":" + totalminutes + "<br />";
 	}
 	else {
 		alert("Please punch out before viewing hours.");
