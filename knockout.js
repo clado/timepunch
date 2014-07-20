@@ -19,7 +19,7 @@ function welcomeScreen(){
 //prints job to view
 function printJob(jobId) {
 	jobname = localStorage["timepunch.job" + jobId + ".name"];
-	document.getElementById("view").innerHTML += '<button class="jobs" id="' + jobId + '" onfocus="selectJob(this.id)" onblur="deselect()"> ' + jobname + '</button>';
+	document.getElementById("view").innerHTML += '<button class="jobs" id="' + jobId + '" onclick="selectJob(this.id)"> ' + jobname + '</button>';
 }
 
 //onfocus action
@@ -29,17 +29,11 @@ function selectJob(id){
 	jobselected = id;
 }
 
-//onblur action
-function deselect(){
-	document.getElementById("sel").disabled = true;
-	document.getElementById("del").disabled = true;
-}
-
 //"select" button
 function beginPunching(){
 	document.getElementById("view").innerHTML = "";
-	//document.getElementById("sel").disabled = true;
-	//document.getElementById("del").disabled = true;
+	document.getElementById("sel").disabled = true;
+	document.getElementById("del").disabled = true;
 	if (localStorage["timepunch.job" + jobselected + ".punchedin"] == "true"){
 		var totalpunches = parseInt(localStorage["timepunch.job" + jobselected + ".totalpunches"]) - 1;
 		var lastpunch = new Date(localStorage["timepunch.job" + jobselected + ".punch" + totalpunches].toString());
