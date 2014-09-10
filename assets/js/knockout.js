@@ -186,3 +186,5 @@ function back(){
 	document.getElementById("punch").style.width = "0px";
 	welcomeScreen();
 }
+
+welcomeScreen()
