@@ -65,7 +65,7 @@ function addJob(){
 	if (jobname != null){
 			var totaljobs = localStorage["timepunch.totaljobs"];
 			localStorage["timepunch.job" + totaljobs + ".name"] = jobname;
-			printJob(totalJobs);
+			printJob(totaljobs);
 			localStorage["timepunch.job" + totaljobs + ".totalpunches"] = 0;
 			localStorage["timepunch.totaljobs"] = parseInt(localStorage["timepunch.totaljobs"]) + 1;
 	}
